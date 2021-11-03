@@ -1,6 +1,7 @@
 import sys
 import inspect
 import unittest
+#from tail_flatten import flatten
 from flatten import flatten
 
 class TestFlatten(unittest.TestCase):
@@ -22,6 +23,11 @@ class TestFlatten(unittest.TestCase):
 
     def test_flatten_nested_1_level(self):
         res = flatten([[5, 6], 6, [7], 8, 10])
+        self.assertEqual(res, [5, 6, 6, 7, 8, 10])
+
+    def test_flatten_nested_last_element_is_list(self):
+        # this is mainly useful for the tail recursion version, but can't hurt for the iterative version
+        res = flatten([[5, 6], 6, [7], 8, [10]])
         self.assertEqual(res, [5, 6, 6, 7, 8, 10])
 
     def test_flatten_nested_multi_level(self):
@@ -54,8 +60,9 @@ class TestFlatten(unittest.TestCase):
 
     @unittest.skip("unsure how this test will run in other environments")
     def test_flatten_nested_extreme_level(self):
+        # See README for discussion of recursion limit
         stack_size = len(inspect.stack(0))
-        max_recursion = sys.getrecursionlimit() - stack_size - 10
+        max_recursion = sys.getrecursionlimit() - stack_size - 10 # Not sure why 10 works, but 5 doesn't? Might the magic number vary depending on.... gremlins?
 
         input = 1
         for i in range(max_recursion):
