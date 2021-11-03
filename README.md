@@ -1,5 +1,5 @@
 # nwea-exercise
-Here we have two implementations of the flatten function in python. I do not consider myself fluent in python but thought it would be nice
+Here we have two implementations of the flatten function in Python 3.8.9. I do not consider myself fluent in Python but thought it would be nice
 to demonstrate that I can find my way around in it. And by doing this excercise (especially exploring the tail recursion option) I learned some
 things about Python, such as the fact that parameters with defaults behave like static variables, so it was useful for me.
 
